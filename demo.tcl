@@ -86,8 +86,11 @@ proc createTree {pathName} {
     set scroll [ttk::scrollbar $frame.y -ori vert -command [list $frame.tree yview]]
     set tree [ttk::treeview $frame.tree -columns [list 1] \
         -yscrollcommand [list $scroll set]]
-    pack $tree -side left -fill both -expand 1
-    pack $scroll -side left -fill y -expand 0
+
+    grid $tree -row 0 -column 0 -sticky nsew
+    grid $scroll -row 0 -column 1 -sticky nsew
+    grid columnconfigure $frame 0 -weight 1
+    grid rowconfigure $frame 0 -weight 1
 
     set tkImage [image create photo -file "images/tk_16x16.png"]
     set wishImage [image create photo -file "images/wish_16x16.png"]
