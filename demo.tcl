@@ -20,7 +20,7 @@ namespace eval ::canvasdial {
             set y [expr {$ym+$r*sin($a)}]
             $w create text $x $y -text $i -fill $(-fg)
         }
-        trace var ::$(-variable) w [list dial'set $w $id $(-from) $(-to)]
+        trace var ::$(-variable) w [list [namespace current]::dial'set $w $id $(-from) $(-to)]
     }
 
     #--------------------------------------------------------------------------
@@ -131,6 +131,7 @@ proc createCanvas {pathName} {
         incr x $size
         incr x 10
     }
+    set V 120
 
     return $c
 }
