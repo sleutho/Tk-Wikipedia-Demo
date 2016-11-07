@@ -84,7 +84,8 @@ proc createTree {pathName} {
 
     set frame [ttk::frame $pathName]
     set scroll [ttk::scrollbar $frame.y -ori vert -command [list $frame.tree yview]]
-    set tree [ttk::treeview $frame.tree -columns [list 1] -yscrollcommand [list $scroll set]]
+    set tree [ttk::treeview $frame.tree -columns [list 1] \
+        -yscrollcommand [list $scroll set]]
     pack $tree -side left -fill both -expand 1
     pack $scroll -side left -fill y -expand 0
 
@@ -122,7 +123,8 @@ proc createCanvas {pathName} {
     set x 10
     set y 10
     foreach size [list 110 130 110 110 130 110] {
-        ::canvasdial::dial $c $x $y [expr $size + $x] [expr $size + $y] -variable V -to 180 -fg blue
+        ::canvasdial::dial $c $x $y [expr $size + $x] [expr $size + $y] \
+            -variable V -to [expr $size + $x] -fg blue
         incr x $size
         incr x 10
     }
@@ -136,7 +138,8 @@ proc createText {pathName} {
     set f [frame $pathName]
     ttk::scrollbar $f.hsb -orient horizontal -command [list $f.t xview]
     ttk::scrollbar $f.vsb -orient vertical -command [list $f.t yview]
-    set textBox [text $f.t -xscrollcommand [list $f.hsb set] -yscrollcommand [list $f.vsb set] -height 10]
+    set textBox [text $f.t -xscrollcommand [list $f.hsb set] \
+        -yscrollcommand [list $f.vsb set] -height 10]
     grid $f.t -row 0 -column 0 -sticky nsew
     grid $f.vsb -row 0 -column 1 -sticky nsew
     grid $f.hsb -row 1 -column 0 -sticky nsew
@@ -211,7 +214,8 @@ proc createRightSide {pathName} {
     after 50 [list incrBusyProgress progress]
     set progressFrame [ttk::frame $labelFrame2.progressIndeterminate]
     pack [ttk::label $progressFrame.label -text "Progress "] -side left
-    pack [ttk::progressbar $progressFrame.progress -orient horizontal -mode indeterminate -variable progress] -side left
+    pack [ttk::progressbar $progressFrame.progress -orient horizontal \
+        -mode indeterminate -variable progress] -side left
     pack $progressFrame -anchor e
     
     set spin [ttk::spinbox $labelFrame2.spin -from 0 -to 100 -increment 1]
@@ -228,14 +232,16 @@ proc createRightSide {pathName} {
 
     set tkImage [image create photo -file "images/tk_24x24.png"]
     pack [ttk::button $labelFrame3.button -text "Button" -image $tkImage -compound left] -fill x
-    pack [ttk::menubutton $labelFrame3.menubutton -text "Menu Button" -image $tkImage -compound left] -fill x
+    pack [ttk::menubutton $labelFrame3.menubutton -text "Menu Button" \
+        -image $tkImage -compound left] -fill x
 
 
     set labelFrame4 [ttk::labelframe $frame.labelFrame4 -padding 10 -text "Label 4"]
     pack $labelFrame4 -side left -anchor n -padx 5
 
     variable listVar [list "Item 1" "Item 2" "Item 3" "Item 4" "Item 5"]
-    set listBox [listbox $labelFrame4.listbox -listvariable listVar -height [expr [llength $listVar] + 1]]
+    set listBox [listbox $labelFrame4.listbox -listvariable listVar \
+        -height [expr [llength $listVar] + 1]]
     $listBox selection set 1
     pack $listBox -fill x
 
