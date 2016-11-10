@@ -1,6 +1,8 @@
 {
     "version": "0.1.0",
-    "command": "wish86t.exe",
+    "windows": {
+        "command": "wish86t.exe"
+    },
     "isShellCommand": true,
     "args": ["${file}"],
     "showOutput": "always"
